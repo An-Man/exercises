@@ -31,29 +31,31 @@ int main()
     std::cin >> polttisTyyppi;
 
     //alustetaan muuttujat matkalle ja kulutukselle
-    double matka {};
-    double kulutus {};
+    
 
     // ilmoitetusta moottorin tyypistä riippuen kysytään joko matka ja kulutus tai pelkästään matka,
     // jos kyse sähköautosta
     switch (polttisTyyppi)
     {
+        double matka;       //nämä voisi alustaa casen sisällä blokissa, tässä sallittu vain declaration
+        double kulutus;
+
         case 'D':
-            matka = (kysyMatka());
-            kulutus = (kysyKulutus());
+            matka = kysyMatka();        //muuttujan arvon sijoitus on ok casen sisällä
+            kulutus = kysyKulutus();
             std::cout << "Polttoainekustannus on " << ((matka * kulutus) / 100) *
                 constants::dieselEuroa << " euroa.\n";
             break;
         
         case 'B':
-            matka = (kysyMatka());
-            kulutus = (kysyKulutus());
+            matka = kysyMatka();
+            kulutus = kysyKulutus();
             std::cout << "Polttoainekustannus on " << ((matka * kulutus) / 100) *
                 constants::e95Euroa << " euroa.\n";
             break;
  
         case 'S':
-            matka = (kysyMatka());
+            matka = kysyMatka();
             std::cout << "Käyttövoimakustannus keskiarvokulutuksella ja -hinnalla on "
                 << ((matka * constants::sahkonKulutus) / 100) *
                 (constants::sahkonHinta / 100) << " euroa.\n";
