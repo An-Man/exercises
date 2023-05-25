@@ -1,13 +1,27 @@
 #include <iostream>
 
+// Funktio jolla tulostetaan listan arvot
+void tulostaLista (int* arr, int size)
+{
+    std::cout << "Listan sisältö: ";
+
+    for (int i{0}; i < size; ++i)
+    {
+        std::cout << arr[i] << ", ";
+    }
+    std::cout << '\n';
+}
+
 int main()
 {
-    int koko {};
+    int koko {}; // käyttäjän määrittelemä listan koko
     std::cout << "Montako lukua syötetään listaan? ";
     std::cin >> koko;
 
+    // luodaan pointerin avulla dynaaminen array jonka koko otetaan muuttujasta 
     int* dynamicArray {new int[koko]};
 
+    // syötetään luvut listaan loopin kautta
     for (int i = 0; i < koko; ++i)
     {
         dynamicArray[i] = i + 1;
@@ -15,14 +29,10 @@ int main()
         std::cin >> dynamicArray[i];
     }
 
-    std::cout << "Listan sisältö: ";
-    for (int i = 0; i < koko; ++i)
-    {
-        std::cout << dynamicArray[i] << ", ";
-    }
-    std::cout << '\n';
+    tulostaLista(dynamicArray, koko);
+    
 
-    // summan laskeminen
+    // tästä summafunktio
     int summa {};
     for (int i = 0; i < koko; ++i)
         {
@@ -40,3 +50,4 @@ int main()
 
     return 0;
 }
+
