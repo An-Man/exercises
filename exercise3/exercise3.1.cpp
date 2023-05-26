@@ -1,7 +1,7 @@
 #include <iostream>
 
 // Funktio jolla tulostetaan listan arvot
-void tulostaLista (int* arr, int size)
+void tulostaLista(int* arr, int size)
 {
     std::cout << "Listan sisältö: ";
 
@@ -10,6 +10,18 @@ void tulostaLista (int* arr, int size)
         std::cout << arr[i] << ", ";
     }
     std::cout << '\n';
+}
+
+// summafunktio
+int laskeSumma(int* arr, int size)
+{
+    int summa{};
+    for (int i{0}; i < size; ++i)
+        {
+          summa += arr[i];  
+        }
+
+    return summa;
 }
 
 int main()
@@ -29,23 +41,19 @@ int main()
         std::cin >> dynamicArray[i];
     }
 
+    // tulostetaan listan luvut syöttöjärjestyksessä
     tulostaLista(dynamicArray, koko);
     
-
-    // tästä summafunktio
-    int summa {};
-    for (int i = 0; i < koko; ++i)
-        {
-          summa += dynamicArray[i];  
-        }
-
-    // keskiarvon laskeminen
+    // lasketaan listan lukujen summa funktiolla
+    int summa {laskeSumma(dynamicArray, koko)};
+ 
+    // lasketaan keskiarvo summan ja koon avulla
     double keskiarvo {static_cast<double>(summa) / koko};
 
-    // tulostetaan summa ja keskiarvo
     std::cout << "Lukujen summa on: " << summa << '\n';
     std::cout << "Lukujen keskiarvo on: " << keskiarvo << '\n';
 
+    // tuhotaan dynamicArray muistin vapauttamiseksi
     delete[] dynamicArray;
 
     return 0;
