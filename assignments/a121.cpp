@@ -7,6 +7,7 @@ std::string getString()
     std::cout << "Enter a string of characters: ";
     std::string str {};
     std::cin >> str;
+    
     return str;
 }
 
@@ -21,12 +22,10 @@ void reverseString(std::string string)
     }
 
     std::cout << '\n';
-
 }
 
 int main()
 {
-    
     std::string str { getString() };
 
     reverseString(str);
