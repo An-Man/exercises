@@ -8,7 +8,6 @@ struct Account
 {
     int acc_num {};
     int acc_balance {};
-    std::map<User, int> users;
 };
 
 struct User  // all variables related to user
