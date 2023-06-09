@@ -36,13 +36,12 @@ int calc_time_diff(const Time& t1, const Time& t2) // function calculates time d
 
 int main()
 {
-    Time start;
-    Time end;
-
     std::cout << "Give start time.\n";
+    Time start;
     get_time(start);
 
     std::cout << "Give end time.\n";
+    Time end;
     get_time(end);
 
     std::cout << "Time difference is: " << calc_time_diff(start, end) << " seconds.\n";
