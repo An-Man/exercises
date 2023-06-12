@@ -161,7 +161,7 @@ int generate_random1_100()
 
     std::uniform_int_distribution random1to100 { 1, 100 };
 
-    return random1to100 (mt);
+    return random1to100(mt);
 }
 
 int generate_random1_10()
@@ -170,7 +170,7 @@ int generate_random1_10()
 
     std::uniform_int_distribution random1to10 { 1, 10 };
 
-    return random1to10 (mt);
+    return random1to10(mt);
 }
 
 void print_vec(const std::vector<int>& vecc)
