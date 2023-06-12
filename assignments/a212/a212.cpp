@@ -6,7 +6,6 @@ Use std::partition to separate the even and
 odd numbers. Print out the vector after partitioning.
 */
 
-
 #include <algorithm>
 #include <iostream>
 #include <iterator>
