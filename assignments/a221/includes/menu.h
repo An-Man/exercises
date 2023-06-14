@@ -6,7 +6,8 @@
 
 void add_to_menu(std::vector<Food>& menu, Food food);
 
-void print_menu(std::vector<Food>& menu);
+Food get_food_from_menu(std::vector<Food>& menu, std::string input);
 
+void print_menu(std::vector<Food>& menu);
 
 #endif
