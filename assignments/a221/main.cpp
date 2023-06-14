@@ -1,11 +1,5 @@
-/* 
-Exercise 1: Ordering system for a restaurant
-
-Set up your program and create the first set of data
-
-To start, your menu ordering program should have a struct called Food. The members for the struct should contain the name, price and ingredients. Your program needs to be able to print out all of the attributes. Divide the program into multiple source and header files as needed.
-Test your program by creating a food item and printing out its ingredients in the main.cpp file.
-*/
+ 
+// Assignment 2_2_1: Ordering system for a restaurant
 
 #include "food.h"
 #include "menu.h"
@@ -23,11 +17,11 @@ int main()
     Food init_food2 { "Soup", 9, "Vegetables"};
     Food init_food3 { "Bread", 5, "Flour"};
 
-    add_to_menu(menu, init_food);
+    add_to_menu(menu, init_food);  // foods added to menu
     add_to_menu(menu, init_food2);
     add_to_menu(menu, init_food3);
 
-    while (true)
+    while (true)  // loop in which customer chooses action
     {
         std::cout << "Please choose:\n"
                     "(1) View menu\n"
@@ -41,7 +35,7 @@ int main()
         {
             case 1:
             {
-                print_menu(menu);
+                print_menu(menu); //
                 break;
             }
             case 2:
@@ -50,6 +44,12 @@ int main()
                 std::string input;
                 std::cin >> input;
   
+                Food new_food {get_food_from_menu(menu, input)}; // check if food is on menu
+                if (new_food.name.empty()) {
+                    std::cout << "Food not on menu\n";
+                    break;
+                }
+
                 add_to_order(order, get_food_from_menu(menu, input));
                 break;
             }

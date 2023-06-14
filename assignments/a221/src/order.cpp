@@ -17,6 +17,7 @@ void print_order(std::vector<Food>& order)
         }
 }
 
+// calculates total price for order
 int calc_order_price(std::vector<Food>& order)
 {
     int sum {};

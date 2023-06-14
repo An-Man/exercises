@@ -10,10 +10,13 @@ menu.push_back(food);
 
 Food get_food_from_menu(std::vector<Food>& menu, std::string input)
 {
-    for (auto& n : menu)
-        if (n.name == input)
+    for (auto& n : menu) {
+        if (n.name == input) {
         return n;
-        // entä jos ei löydy?
+        }
+    }
+    Food empty_food {};
+    return empty_food;  // if food not found, returns empty
 }
 
 void print_menu(std::vector<Food>& menu)
