@@ -1,0 +1,3 @@
+[submodule "assignments/a241/external/cxxopts"]
+	path = assignments/a241/external/cxxopts
+	url = https://github.com/jarro2783/cxxopts
