@@ -5,6 +5,7 @@ Calculator
 
 #include <iostream>
 #include "utility.h"
+#include "cxxopts.hpp"
 
 int main()
 {
