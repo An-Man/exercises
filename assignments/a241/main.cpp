@@ -1,27 +1,26 @@
 #include <iostream>
 #include <fstream>
+#include "printfile.h"
+#include "cxxopts.hpp"
 
+/*
+Assignment 2_4_1, see exercise-related .cpp-files in src-folder by feature.
+Printfile-library is exercise 1.
+...
+*/
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    if (argc < 2)
+
+    if (argc < 2) // if filename-argument is missing from command line
     {
         std::cerr << "Error: Filename missing." << '\n';
         return 1;
     }
 
-    std::string filename = argv[1];
+    std::string filename{argv[1]}; // create a string with user input argument
 
-    std::ifstream input_file("lorem_ipsum.txt");
+    print_file(filename); // print file with the filename provided
 
-    if (input_file.is_open()) {
-        std::string text;
-        while (input_file >> text) {
-            std::cout << text << '\n';
-        }
-    } else {
-        std::cout << "Unable to open file.\n";
-    }
-
-
+    return 0;
 }
