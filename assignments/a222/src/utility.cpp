@@ -1,10 +1,11 @@
 #include "../includes/utility.h"
 #include <iostream>
+#include <vector>
 
 int get_integer()
 {
-    std::cout << "Enter an integer: ";
-    int input{};
+    std::cout << "Enter an integer: "; // no input validation here, i'm afraid
+    int input {};
     std::cin >> input;
     return input;
 }
