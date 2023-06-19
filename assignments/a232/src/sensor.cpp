@@ -1,8 +1,10 @@
 #include "../includes/sensor.h"
 #include "../includes/randomnum.h"
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 void print_sensor_readings(std::vector<Sensor>& sensor_vector)
 {
@@ -12,6 +14,8 @@ void print_sensor_readings(std::vector<Sensor>& sensor_vector)
         "\tSensor timestamp: " << reading.timestamp <<
         "\tSensor value: " << reading.sensor_value << '\n';
     }
+
+    std::cout << "---\n";
 }
 
 std::vector<Sensor> generate_list_of_20()
@@ -49,3 +53,72 @@ Sensor generate_sensor_reading() // generates one sensor reading
     return new_sensor;
 }
 
+std::vector<Sensor> filter_by_sensor(std::vector<Sensor>& all_sensors, std::string filt_id)
+{
+    std::vector<Sensor> new_vector;
+
+    for (auto& reading : all_sensors)
+    {
+        if (reading.sensor_id == filt_id)
+        {
+            new_vector.push_back(reading);
+        }
+    }
+    return new_vector;
+}
+
+bool compare_by_time(const Sensor& sensor1, const Sensor& sensor2) 
+{
+        return sensor1.timestamp < sensor2.timestamp;
+}
+
+std::vector<Sensor> sort_by_time(std::vector<Sensor>& data)
+{
+    std::sort(data.begin(), data.end(), compare_by_time);
+
+    return data;
+}
+
+double calc_mean_value(std::vector<Sensor>& data)
+{
+    double sum {};
+    for (auto& reading : data) {
+        sum += reading.sensor_value;
+    }
+
+    return (sum / data.size());
+}
+
+void print_outliers(std::vector<Sensor>& data, double mean)
+{
+    for (auto& reading : data) {
+        if (reading.sensor_value >= (mean + 8.0) || 
+        reading.sensor_value <= (mean - 8.0))
+        {
+            std::cout << "Outlier detected - " <<
+            " Sensor ID: " << reading.sensor_id <<
+            " Sensor timestamp: " << reading.timestamp <<
+            " Sensor value: " << reading.sensor_value << '\n';
+        }
+    }
+}
+
+std::string find_most_frequent(std::vector<Sensor>& data)
+{
+    std::map<std::string, int> frequency_map;
+
+    for (const auto& reading : data) {
+        frequency_map[reading.sensor_id]++;
+    }
+
+    int max_freq {0};
+    std::string max_freq_sensor_id {};
+
+    for (const auto& pair : frequency_map) {
+        if (pair.second > max_freq) {
+            max_freq = pair.second;
+            max_freq_sensor_id = pair.first;
+        }
+    }
+    return max_freq_sensor_id;
+}
