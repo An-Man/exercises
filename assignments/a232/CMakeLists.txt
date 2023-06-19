@@ -6,5 +6,5 @@ add_subdirectory(src)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
-target_include_directories(${PROJECT_NAME} includes)
-target_link_libraries(${PROJECT_NAME} PUBLIC sensor)
+target_include_directories(${PROJECT_NAME} PUBLIC includes)
+target_link_libraries(${PROJECT_NAME} PUBLIC sensor randomnum)
