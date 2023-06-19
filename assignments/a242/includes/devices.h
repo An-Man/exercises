@@ -5,15 +5,15 @@
 
 struct Master {
     int dev_id {};
-    bool master {true};
+    bool is_master {true};
 };
 
 struct Slave {
     int dev_id {};
-    bool master {false};
-    std::map<int, Register> registers;
+    bool is_master {false};
+    std::map<int, Register> regs;
 };
 
-
+Slave generate_slaves_registers(std::map<int, Slave>& slaves);
 
 #endif
