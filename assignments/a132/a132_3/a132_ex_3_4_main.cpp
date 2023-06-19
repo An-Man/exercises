@@ -26,15 +26,15 @@ void enter_user_info(int customer_num)  // gets data from user
 {
     std::cout << "Enter name: ";
     std::string input;
-    std::cin >> input;
+    std::getline(std::cin >> std::ws, input);
     all_users[customer_num].name = input;
 
     std::cout << "Enter address: ";
-    std::cin >> input;
+    std::getline(std::cin >> std::ws, input);
     all_users[customer_num].address = input;
     
     std::cout << "Enter telephone number: ";
-    std::cin >> input;
+    std::getline(std::cin >> std::ws, input);
     all_users[customer_num].tel = input;
 }
 
@@ -108,6 +108,7 @@ void add_new_account() // lets the user create another account
     std::cout << "Input unique account number: " << '\n';
     int input_acc {};
     std::cin >> input_acc;
+    //tähän kutsutaan bool-funktiota joka luuppaa käyttäjät ja tilit
 
     Account new_account {input_acc, 0};     // new instance of Account, acc_number is the user input
     all_users[input_cust].accounts[input_acc] = new_account; // connects user to the account by same number
@@ -119,7 +120,8 @@ int add_user()
     std::cout << "Please input unique customer number: " << '\n';
     int input {};
     std::cin >> input;
-
+    // tähän kutsu bool-funktio joka luuppaa käyttäjänumerot ja kertoo onko uniikki
+    // palauta error tai exception jos on jo olemassa 
     User new_user {};
     new_user.customer_num = input;
     all_users[input] = new_user;
@@ -129,24 +131,24 @@ int add_user()
 
 int main()
 {
-    std::cout << "Welcome to bankings_systemses!\n"; 
+    std::cout << "Welcome to banking system!\n"; 
 
     while (true)
     {       
         std::cout << "Choose (1) to create new user, "
             "(2) to manage user, (3) to output to file, or (4) to exit: ";
-        int choice {};
+        char choice {};
         std::cin >> choice;
 
         switch (choice) // perform function call and return to beginning of loop
         {
-            case 1:
+            case '1':
             {
-                // luo asiakas ja tiedot
-                enter_user_info(add_user());// add_user palauttaa customer_numberin
+                //
+                enter_user_info(add_user());// add_user returns customer_number
                 break;
             }
-            case 2:
+            case '2':
             {
                 bool stay_in_loop = true;
 
@@ -198,7 +200,7 @@ int main()
                 
             break;    
             }
-            case 3:
+            case '3':
             {
                 std::ofstream outf{"bank.txt"};
 
@@ -227,13 +229,19 @@ int main()
                 std::cout << "Printed to file.\n" ;
  
             }
-                 
+
             break; 
             
-            case 4:
+            case '4':
             {
                 std::cout << "Bye bye!" << '\n'; // quits program
                 return 0;
+            }
+        
+            default:
+            {
+            std::cout << "Try again.\n";
+            break;
             }
         }
 
