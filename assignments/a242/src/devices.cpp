@@ -1,23 +1,17 @@
 #include "../includes/devices.h"
 #include "../includes/utils.h"
-#include <map>
+#include <vector>
 
-Slave generate_slaves_registers(std::map<int, Slave>& all_slaves)
+Slave generate_slave(int id)
 {
     Slave new_slave {};
 
-    int generate_id {random_1000to9999()};
-
-    new_slave.dev_id = generate_id;
-    new_slave.is_master = false;
-    all_slaves[generate_id] = new_slave;
-
-    int generate_reg_adr {random_100k_200k()};
-    int generate_reg_value {random_0_255()};
-    Register new_register {generate_reg_adr, generate_reg_value};
-    new_slave.regs[generate_reg_adr] = new_register;
+    std::string helper {};
+    new_slave.dev_id = id;
+    new_slave.master = "no";
+    new_slave.reg_adr = random_100k_200k();
+    new_slave.reg_value = random_0_255();
     
-
     return new_slave;
 }
 

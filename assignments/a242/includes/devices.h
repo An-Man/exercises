@@ -2,18 +2,20 @@
 #define DEVICES_H
 #include <map>
 #include <registers.h>
+#include <string>
 
 struct Master {
     int dev_id {};
-    bool is_master {true};
+    std::string master {};
 };
 
 struct Slave {
-    int dev_id {};
-    bool is_master {false};
-    std::map<int, Register> regs;
+    std::string dev_id {};
+    std::string master {};
+    int reg_adr {};
+    int reg_value {};
 };
 
-Slave generate_slaves_registers(std::map<int, Slave>& slaves);
+Slave generate_slave(int id);
 
 #endif

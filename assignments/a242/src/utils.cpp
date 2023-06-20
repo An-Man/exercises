@@ -1,5 +1,11 @@
 #include "../includes/utils.h"
+#include <fstream>
+#include <sstream>
+#include <iostream>
 #include <random>
+#include <string>
+#include <vector>
+
 
 int random_1000to9999()
 {
@@ -26,4 +32,27 @@ int random_0_255()
     std::uniform_int_distribution r_0_255 { 0, 255 };
 
     return r_0_255 (mt);    
+}
+
+void search_and_print(std::ifstream& inputf, std::string target_id)
+{
+    if(!inputf.is_open()) {
+    std::cout << "Error: file not found\n";
+    return;
+    }
+
+    std::string line {};
+
+    while (std::getline(inputf, line))
+    {
+        std::istringstream iss(line);
+        std::string cell;
+
+        if (std::getline(iss, cell, ',') && cell == target_id)
+        {
+            std::cout << 
+        }  
+    }
+
+    return;
 }
