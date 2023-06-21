@@ -6,7 +6,6 @@ Slave generate_slave(int id)
 {
     Slave new_slave {};
 
-    std::string helper {};
     new_slave.dev_id = id;
     new_slave.master = "no";
     new_slave.reg_adr = random_100k_200k();

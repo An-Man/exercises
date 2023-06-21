@@ -10,7 +10,7 @@ struct Master {
 };
 
 struct Slave {
-    std::string dev_id {};
+    int dev_id {};
     std::string master {};
     int reg_adr {};
     int reg_value {};

@@ -1,4 +1,5 @@
 #include "../includes/utils.h"
+#include "../includes/devices.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -34,25 +35,72 @@ int random_0_255()
     return r_0_255 (mt);    
 }
 
-void search_and_print(std::ifstream& inputf, std::string target_id)
+void write_devices_to_file(std::string filename, std::vector<Slave> slaves, Master master)
 {
-    if(!inputf.is_open()) {
-    std::cout << "Error: file not found\n";
-    return;
+    std::ofstream output_file (filename);
+
+    if (!output_file) {
+        std::cout << "error\n";
+        return;
+    }
+    output_file << "Device id, Master\n";
+
+    for (auto& c : slaves) { // first loop slaves from vector, then add master
+        output_file << c.dev_id << "," << c.master << "," << '\n';
+    }                    
+    output_file << master.dev_id << "," << master.master << "," << '\n';
+
+    output_file.close();    
+}
+
+void write_registers_to_file(std::string filename, std::vector<Slave> slaves)
+{
+    std::ofstream output_file (filename);
+        
+    if (!output_file) {
+        std::cout << "error\n";
+        return;
+    }
+        
+    output_file << "Slave id, Register address, Value\n";
+    
+    for (auto& slave : slaves) { //
+        output_file << slave.dev_id << "," << slave.reg_adr <<
+          "," << slave.reg_value << '\n';
+    } 
+
+    output_file.close();
+}
+
+std::string search_value_str(std::string filename, std::string target_id)
+{
+    std::ifstream input_file ("registers.csv");
+
+    if(!input_file) {
+        return "Error: file not found\n";
+    }
+    
+    if(!input_file.is_open()) {
+    return "Error: file not found\n";
     }
 
     std::string line {};
 
-    while (std::getline(inputf, line))
+    while (std::getline(input_file, line))
     {
         std::istringstream iss(line);
-        std::string cell;
+        std::string id_string;
+        std::getline(iss, id_string, ',');
 
-        if (std::getline(iss, cell, ',') && cell == target_id)
+        if (target_id == id_string)
         {
-            std::cout << 
-        }  
-    }
-
-    return;
+        std::string reg {};
+        std::getline(iss, reg, ',');
+        std::string value {};
+        std::getline(iss, value, ',');
+        input_file.close();
+        return value;
+        }
+    }   
+    return "Target_id not found";                      
 }
