@@ -3,4 +3,6 @@
 
 void print_pascal(int row_num);
 
+int calculate_coef(int coef, int i, int j);
+
 #endif
