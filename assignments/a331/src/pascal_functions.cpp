@@ -15,7 +15,7 @@ void print_pascal(int row_num)
         for (int j{1}; j <= i; j++)
         {
             std::cout << coef << " ";
-            coef = coef*(i-j)/j;
+            coef = coef*(i-j)/j;        // tästä funktio jota voi testata!
         }
         std::cout << "\n";
     }
