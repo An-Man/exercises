@@ -13,17 +13,19 @@ odd numbers. Print out the vector after partitioning.
 
 int main()
 {
-    std::vector<int> vek {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::vector<int> vec {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-    for (int elem : vek)            // print out vector vek
+    for (int elem : vec)
+    {
         std::cout << elem << ' ';
+    }
 
-    auto it = std::partition(vek.begin(), vek.end(), [](int i) {return i % 2 == 0;});
+    auto it = std::partition(vec.begin(), vec.end(), [](int i) {return i % 2 == 0;});
 
     std::cout << "\nPartitioned vector: ";
-    std::copy(std::begin(vek), it, std::ostream_iterator<int>(std::cout, " "));
+    std::copy(std::begin(vec), it, std::ostream_iterator<int>(std::cout, " "));
     std::cout << "* ";
-    std::copy(it, std::end(vek), std::ostream_iterator<int>(std::cout, " "));
+    std::copy(it, std::end(vec), std::ostream_iterator<int>(std::cout, " "));
 
     // printed partitioned: 10 2 8 4 6 * 5 7 3 9 1
 
@@ -43,29 +45,31 @@ int main()
 
 void print_vec(const std::vector<int>& vecc)
 {
-        for (int elem : vecc)            // print out vector vek
+        for (int elem : vecc)
+        {      
             std::cout << elem << ' ';
+        }
         std::cout << '\n';
 }
 
 int main()
 {
-    std::vector<int> vek1 {5, 4, 9, 2, 4, 10};
-    std::vector<int> vek2 {11, 2, 4, 8, 16, 17};
+    std::vector<int> vec1 {5, 4, 9, 2, 4, 10};
+    std::vector<int> vec2 {11, 2, 4, 8, 16, 17};
 
     std::cout << "Initial vectors:\n";
-    print_vec(vek1);
-    print_vec(vek2);
+    print_vec(vec1);
+    print_vec(vec2);
     
     std::cout << "Sorted vectors:\n";
-    std::sort(vek1.begin(), vek1.end());
-    std::sort(vek2.begin(), vek2.end());
+    std::sort(vec1.begin(), vec1.end());
+    std::sort(vec2.begin(), vec2.end());
 
-    print_vec(vek1);
-    print_vec(vek2);
+    print_vec(vec1);
+    print_vec(vec2);
 
     std::vector<int> v_intersection;
-    std::set_intersection(vek1.begin(), vek1.end(), vek2.begin(), vek2.end(),
+    std::set_intersection(vec1.begin(), vec1.end(), vec2.begin(), vec2.end(),
                           std::back_inserter(v_intersection));
     
     std::cout << "Common elements in the vectors:\n";
@@ -88,20 +92,22 @@ Create a vector with 10 random elements in it. Rotate elements to the right by 3
 
 void print_vec(const std::vector<int>& vecc)
 {
-        for (int elem : vecc)            // print out vector vek
+        for (int elem : vecc)
+        {
             std::cout << elem << ' ';
+        }
         std::cout << '\n';
 }
 
 int main()
 {
-    std::vector<int> vek1 {5, 4, 9, 2, 15, 10, 7, 3, 0, 6};
+    std::vector<int> vec1 {5, 4, 9, 2, 15, 10, 7, 3, 0, 6};
 
-    print_vec(vek1);
+    print_vec(vec1);
 
-    std::rotate(vek1.rbegin(), vek1.rbegin() + 3, vek1.rend());
+    std::rotate(vec1.rbegin(), vec1.rbegin() + 3, vec1.rend());
 
-    print_vec(vek1);
+    print_vec(vec1);
 
     return 0;
 
@@ -121,8 +127,10 @@ If no such elements exist, print a suitable message.
 
 void print_list(const std::list<int>& list)
 {
-        for (int elem : list)            // print out vector vek
+        for (int elem : list)            
+        {    
             std::cout << elem << ' ';
+        }
         std::cout << '\n';
 }
 
@@ -175,20 +183,22 @@ int generate_random1_10()
 
 void print_vec(const std::vector<int>& vecc)
 {
-        for (int elem : vecc)            // print out vector vek
+        for (int elem : vecc)
+        {           
             std::cout << elem << ' ';
+        }
         std::cout << '\n';
 }
 
 int main()
 {
 
-    std::vector<int> vek1(generate_random1_10());
+    std::vector<int> vec1(generate_random1_10());
 
-    for (int& i : vek1)
+    for (int& i : vec1)
         i = generate_random1_100();
     
-    print_vec(vek1);
+    print_vec(vec1);
 
     return 0;
 }
