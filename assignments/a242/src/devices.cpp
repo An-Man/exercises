@@ -1,6 +1,7 @@
 #include "../includes/devices.h"
 #include "../includes/utils.h"
 #include <vector>
+#include <fstream>
 
 Slave generate_slave(int id)
 {
@@ -14,3 +15,13 @@ Slave generate_slave(int id)
     return new_slave;
 }
 
+std::vector<Slave> add_10_slaves_to_vector()
+{
+    std::vector<Slave> slaves;
+
+    for (int i = 1; i <= 10; ++i) {
+       slaves.push_back(generate_slave(i));
+    }
+
+    return slaves;
+}

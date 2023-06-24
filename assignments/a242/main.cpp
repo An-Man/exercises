@@ -4,24 +4,17 @@ Assignment 2_4_2 Modbus communication
 
 #include "devices.h"
 #include "utils.h"
-#include "registers.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <map>
 #include <vector>
 
-//std::map<int, Slave> all_slaves;
- 
 int main()
 {
-    std::vector<Slave> slaves;
+    //create a vector of slaves with id 1-10
+    std::vector<Slave> slaves {add_10_slaves_to_vector()};
  
-    for (int i = 1; i <= 10; ++i) {
-       slaves.push_back(generate_slave(i));
-    } 
-    
-    // generate master device
+    // generate a master device
     Master master { random_1000to9999(), "yes" };
 
     // output devices to devices.csv
@@ -31,19 +24,22 @@ int main()
     write_registers_to_file("registers.csv", slaves);
     
     // simulate master reading from file
+    int target_id_num {5}; // set specified device id as 5
 
-    std::string target_id {"5"}; // set specified device id as 5
+    // searches register value from file with id
+    search_value_str("registers.csv", target_id_num);
 
-    
-    search_value_str("registers.csv", target_id);
+    // prints value by device id
+    print_register_value("registers.csv", target_id_num);
 
-    std::cout << "Register value of id " << target_id << " is: " <<
-    search_value_str("registers.csv", target_id) << '\n';
+    // simulate master writing to file
+    // find value by device id, replace with new value and write to file
+    // here: searches device id 5, changes value to 100 
+    int new_value {100};
+    write_to_slave_register("registers.csv", target_id_num, new_value, slaves);
 
-    //simulate master writing to file
-    // write_to_slave_register()
-    // std::ofstream output_file_reg2 ("registers.csv");
-
+    // prints value again after change
+    print_register_value("registers.csv", target_id_num);
 
     return 0;
 

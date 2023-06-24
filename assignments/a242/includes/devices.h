@@ -1,8 +1,7 @@
 #ifndef DEVICES_H
 #define DEVICES_H
-#include <map>
-#include <registers.h>
 #include <string>
+#include <vector>
 
 struct Master {
     int dev_id {};
@@ -17,5 +16,7 @@ struct Slave {
 };
 
 Slave generate_slave(int id);
+
+std::vector<Slave> add_10_slaves_to_vector();
 
 #endif

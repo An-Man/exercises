@@ -13,6 +13,11 @@ void write_devices_to_file(std::string filename, std::vector<Slave> slaves, Mast
 
 void write_registers_to_file(std::string filename, std::vector<Slave> slaves);
 
-std::string search_value_str(std::string filename, std::string target_id);
+std::string search_value_str(std::string filename, int target_id_num);
+
+void write_to_slave_register(std::string filename, int target_id, 
+    int target_value, std::vector<Slave> slaves);
+
+void print_register_value(std::string filename, int target_id_num);
 
 #endif

@@ -7,14 +7,13 @@
 #include <string>
 #include <vector>
 
-
 int random_1000to9999()
 {
-    std::mt19937 mt{ std::random_device{}() };
+       std::mt19937 mt{ std::random_device{}() };
 
-    std::uniform_int_distribution r1000to9999 { 1000, 9999 };
+    std::uniform_int_distribution r_1000_9999 { 1000, 9999 };
 
-    return r1000to9999 (mt);
+    return r_1000_9999 (mt); 
 }
 
 int random_100k_200k()
@@ -72,18 +71,15 @@ void write_registers_to_file(std::string filename, std::vector<Slave> slaves)
     output_file.close();
 }
 
-std::string search_value_str(std::string filename, std::string target_id)
+std::string search_value_str(std::string filename, int target_id_num)
 {
-    std::ifstream input_file ("registers.csv");
+    std::ifstream input_file (filename);
 
     if(!input_file) {
         return "Error: file not found\n";
     }
-    
-    if(!input_file.is_open()) {
-    return "Error: file not found\n";
-    }
 
+    std::string target_id = std::to_string(target_id_num);
     std::string line {};
 
     while (std::getline(input_file, line))
@@ -103,4 +99,24 @@ std::string search_value_str(std::string filename, std::string target_id)
         }
     }   
     return "Target_id not found";                      
+}
+
+void write_to_slave_register(std::string filename, int target_id, 
+    int new_value, std::vector<Slave> slaves)
+{
+    for (Slave& slave : slaves)
+    {
+        if (slave.dev_id == target_id)
+        {
+        slave.reg_value = new_value;
+        }
+    }
+
+    write_registers_to_file(filename, slaves);    
+}
+
+void print_register_value(std::string filename, int target_id_num)
+{
+    std::cout << "Register value of id " << target_id_num << " is: " <<
+    search_value_str(filename, target_id_num) << '\n';
 }
