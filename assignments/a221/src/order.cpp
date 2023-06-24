@@ -11,9 +11,9 @@ void print_order(std::vector<Food>& order)
 {
     std::cout << "Current order: \n";
     
-    for (auto& n : order)
+    for (auto& food : order)
         {
-        std::cout << n.name << ", " << n.price << " euros \n";
+        std::cout << food.name << ", " << food.price << " euros \n";
         }
 }
 
@@ -21,9 +21,9 @@ void print_order(std::vector<Food>& order)
 int calc_order_price(std::vector<Food>& order)
 {
     int sum {};
-    for (auto& n : order)
+    for (auto& food : order)
         {
-            sum += n.price;
+            sum += food.price;
         }
     return sum;
 }

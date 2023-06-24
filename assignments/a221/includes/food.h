@@ -1,7 +1,6 @@
-#include <string>
-
 #ifndef FOOD_H
 #define FOOD_H
+#include <string>
 
 struct Food
 {
