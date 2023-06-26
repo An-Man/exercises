@@ -14,17 +14,19 @@ int main()
 
     while (true)
     {       
-        std::cout << "Choose (1) to create new user, "
-            "(2) to manage user, (3) to output to file, or (4) to exit: ";
-        char choice {};
-        std::cin >> choice;
 
-        switch (choice) // perform function call and return to beginning of loop
+        switch (get_choice_main_menu()) // perform function call and return to beginning of loop
         {
             case '1':
             {
                 //
-                enter_user_info(add_user());// add_user returns customer_number
+                int new_user_num {add_user()};
+                if (new_user_num == -1)
+                {
+                    break;
+                }
+
+                enter_user_info(new_user_num);
                 break;
             }
             case '2':
