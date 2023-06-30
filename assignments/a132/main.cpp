@@ -1,6 +1,6 @@
-#include "account.h"
-#include "fileop.h"
-#include "user.h"
+#include "includes/account.h"
+#include "includes/fileop.h"
+#include "includes/user.h"
 #include <iostream>
 #include <map>
 #include <string>
@@ -14,33 +14,30 @@ int main()
 
     while (true)
     {       
-
         switch (get_choice_main_menu()) // perform function call and return to beginning of loop
         {
-            case '1':
+            case 1:
             {
-                //
-                int new_user_num {add_user()};
-                if (new_user_num == -1)
-                {
-                    break;
-                }
+                // Adding a user and info
+                int new_user_num {create_user()};
 
-                enter_user_info(new_user_num);
+                std::cout << "Enter name: ";
+                std::string name {ask_str_input()};
+                std::cout << "Enter address: ";
+                std::string addr {ask_str_input()};
+                std::cout << "Enter telephone number: ";
+                std::string tel {ask_str_input()};
+
+                add_user_info(new_user_num, name, addr, tel);
                 break;
             }
-            case '2':
+            case 2:
             {
                 bool stay_in_loop = true;
 
                 while (stay_in_loop)   
-                {
-                    std::cout << "Press (1) to display user info, (2) to add an account, \n"
-                    "(3) to check balance, (4) to deposit money, (5) to withdraw, (6) to go back: ";
-                    int choice {};
-                    std::cin >> choice;
-                    
-                    switch (choice)
+                {                    
+                    switch (get_choice_actions())
                     {
                         case 1:
                         {
@@ -49,7 +46,6 @@ int main()
                         }
                         case 2:
                         {
-                            
                             add_new_account();
                             break;
                         }
@@ -75,13 +71,16 @@ int main()
                             break;
                         }
                         default:
+                        {
+                            std::cout << "Try again.\n";
                             break;
+                        }
                     }
                 }
                 
             break;    
             }
-            case '3':
+            case 3:
             {
                 print_to_file("bank.txt");
 
@@ -90,9 +89,9 @@ int main()
 
             break; 
             
-            case '4':
+            case 4:
             {
-                std::cout << "Bye bye!" << '\n'; // quits program
+                std::cout << "Bye bye!\n"; // quits program
                 return 0;
             }
         
@@ -102,9 +101,8 @@ int main()
                 break;
             }
         }
-
     }
-    
+
     return 0;
 
 }

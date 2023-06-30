@@ -40,4 +40,11 @@ assignments/a231/main
 assignments/a232/main
 assignments/a232/build/
 assignments/a241/build/
+assignments/a311/
+**/main
+**/doctest.h
+**/test
+assignments/at1/tests/test.txt
+assignments/at1/tests/filetest
 assignments/at1/build/
+assignments/at1/reco*

@@ -15,15 +15,24 @@ struct User  // all variables related to user
 
 inline std::map<int, User> all_users {}; // this is inline to make it available across files
 
-char get_choice_main_menu();
+int get_choice_main_menu();
 
-int add_user();
+int get_choice_actions();
 
-bool is_unique(int input, std::map<int, User>& all_users);
+int create_user();
 
-void enter_user_info(int customer_num);
+std::string ask_str_input();
+int ask_int_input();
+
+bool user_exists(int input, std::map<int, User>& all_users);
+
+void add_user_info(int customer_num, std::string name, std::string addr, std::string tel);
+
+int get_cust_number();
 
 void print_user_info();
+
+void ignoreLine();
 
 
 
