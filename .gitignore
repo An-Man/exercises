@@ -8,12 +8,10 @@ exercise2/exercise2.5/exercise2.6
 exercise2/exercise2.7/exercise2.7
 exercise3/exercise3.1
 testi/*
-.gitignore
 assignments/a123
 assignments/a124/a124
 assignments/a125/a125
 assignments/a131/
-assignments/a132/build/
 assignments/a123/a123
 assignments/a131/a131ex1/ex1
 assignments/a131/a131ex2/ex2
@@ -25,7 +23,6 @@ assignments/a131/a131ex7/ex7
 assignments/a131/a131ex8/ex8
 assignments/a131/a131ex9/ex9
 assignments/a131/a131ex10/ex10
-assignments/a132/main
 assignments/a141/a141ex1/a141ex1
 assignments/a141/a141ex2/a141ex2
 assignments/a141/a141ex3/a141ex3
@@ -41,10 +38,12 @@ assignments/a232/main
 assignments/a232/build/
 assignments/a241/build/
 assignments/a311/
-**/main
-**/doctest.h
-**/test
 assignments/at1/tests/test.txt
 assignments/at1/tests/filetest
 assignments/at1/build/
-assignments/at1/reco*
+assignments/at1/records.txt
+**/doctest.h
+**/main
+**/test
+*.csv
+
