@@ -1,9 +1,10 @@
+
+#include "../includes/account.h"
 #include "../includes/user.h"
 #include <iostream>
 #include <limits>
 #include <map>
 #include <string>
-
 
 int get_choice_main_menu()
 {
@@ -36,11 +37,13 @@ bool user_exists(int input, std::map<int, User>& all_users)
     return false;
 }
 
+
+
 int create_user()
 {
     while (true)
     {
-        std::cout << "Creating a new user. " << '\n';
+        std::cout << "\nCreating a new user. " << '\n';
         std::cout << "Please input unique customer number: " << '\n';
 
         int input {ask_int_input()};
@@ -60,9 +63,18 @@ int create_user()
     }
 }
 
-// assign given strings to user in map by cust number 
-void add_user_info(int customer_num, std::string name, std::string addr, std::string tel)  // gets data from user
+
+void add_user_info(int customer_num)  // gets data from user
 {
+    std::cout << "Enter name: ";
+    std::string name {ask_str_input()};
+
+    std::cout << "Enter address: ";
+    std::string addr {ask_str_input()};
+
+    std::cout << "Enter telephone number: ";
+    std::string tel {ask_str_input()};
+
     all_users[customer_num].name = name; 
     all_users[customer_num].address = addr;
     all_users[customer_num].tel = tel;
@@ -71,7 +83,7 @@ void add_user_info(int customer_num, std::string name, std::string addr, std::st
 std::string ask_str_input()
 {
     std::string input;
-    std::getline(std::cin >> std::ws, input);
+    std::getline(std::cin >> std::ws, input); //remove whitespace if needed
     return input;
 }
 
@@ -84,9 +96,14 @@ int ask_int_input()
 
         if (!std::cin) // if the previous extraction failed
         {
-        std::cin.clear(); // clear cin
-        ignoreLine();     // and remove input
-        std::cout << "Try again: ";
+            std::cin.clear(); // clear cin
+            ignoreLine();     // and remove input
+            std::cout << "Try again: ";
+        }
+        else if (input <= 0)
+        {
+            std::cout << "Number must be positive and not 0\n";
+            std::cout << "Try again: ";
         }
         else
         {
@@ -102,7 +119,7 @@ int get_cust_number()
         std::cout << "Input customer number: \n";
         int input {ask_int_input()};
 
-        if (input == 0) {
+        if (input == 0) { // lets user get out of loop if needed
             return 0;
         }
 

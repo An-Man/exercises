@@ -1,66 +1,100 @@
-#include "account.h"
-#include "user.h"
+#include "../includes/account.h"
+#include "../includes/user.h"
 #include <iostream>
 
 void add_new_account() // lets the user create another account
 {
-    std::cout << "To add an account, input customer number: " << '\n';
-    int input_cust {};
-    std::cin >> input_cust;
-    std::cout << "Input unique account number: " << '\n';
-    int input_acc {};
-    std::cin >> input_acc;
-    //tähän kutsutaan bool-funktiota joka luuppaa käyttäjät ja tilit
+    std::cout << "Adding a new account." << '\n';
+    int input_cust{get_cust_number()};
 
-    Account new_account {input_acc, 0};     // new instance of Account, acc_number is the user input
-    all_users[input_cust].accounts[input_acc] = new_account; // connects user to the account by same number
+    while (true)
+    {
+        std::cout << "Input unique account number: " << '\n';
+        int input_acc{ask_int_input()};
+
+        if (user_account_exists(input_cust, input_acc, all_users))
+        {
+            std::cout << "Account number already exists.\n";
+        }
+        else
+        {
+            Account new_account{input_acc, 0};
+            all_users[input_cust].accounts[input_acc] = new_account;
+            std::cout << "Account created.\n";
+            break;
+        }
+    }
 }
 
-void check_balance() // checks balance on account, asks which number
+bool user_account_exists(int customer, int acc, std::map<int, User>& all_users)
 {
-    std::cout << "To check balance, input customer number: " << '\n';
-    int input_cust {};
-    std::cin >> input_cust;
-    std::cout << "Input account number: " << '\n';
-    int input_acc {};
-    std::cin >> input_acc;
+    for (auto& pair : all_users)
+    {
+        if (pair.first == customer && pair.second.accounts[acc].acc_num == acc)
+            
+        return true;
+    }
+    return false;
+}
 
-    std::cout << "Balance on account nr "
-        << input_acc << " is: " << all_users[input_cust].accounts[input_acc].acc_balance << '\n';
+int get_acc_number(int cust_number)
+{
+    while (true)
+    {
+        std::cout << "Input account number: \n";
+        int input_acc{ask_int_input()};
+
+        if (input_acc == 0)
+        {
+            return 0;
+        }
+
+        if (!user_account_exists(cust_number, input_acc, all_users))
+        {
+            std::cout << "Account not found. Try again or choose"
+                " (0) to go back.\n";
+        }
+        else
+        {
+            return input_acc;
+        }
+    }
+}
+
+int get_acc_balance() // asks for customer and account number, returns balance
+{
+    int input_cust{get_cust_number()};
+    int input_acc{get_acc_number(input_cust)};
+    return all_users[input_cust].accounts[input_acc].acc_balance;
 }
 
 void add_money() // add money on chosen account
 {
-    std::cout << "To deposit money, enter customer number: ";
-    int input_cust {};
-    std::cin >> input_cust;
+    std::cout << "Starting deposit.\n";
 
-    std::cout << "Enter account number: ";
-    int input_acc {};
-    std::cin >> input_acc;
+    int input_cust{get_cust_number()};
+    int input_acc{get_acc_number(input_cust)};
 
     std::cout << "Input sum to deposit to account: ";
-    int add {};
-    std::cin >> add;
+    int add_sum{ask_int_input()};
 
-    all_users[input_cust].accounts[input_acc].acc_balance += add;
+    all_users[input_cust].accounts[input_acc].acc_balance += add_sum;
 
-    std::cout << add << " deposited to account. \n"
-    "Balance: " << all_users[input_cust].accounts[input_acc].acc_balance << '\n';                        
+    std::cout << add_sum << " deposited to account.\nBalance: "
+        << all_users[input_cust].accounts[input_acc].acc_balance << '\n';
 }
 
 void withdraw_money() // withdraw from account
 {
-    std::cout << "To withdraw from account, enter customer number: ";
-    int input_cust {};
-    std::cin >> input_cust;
-    std::cout << "Enter account number: ";
-    int input_acc {};
-    std::cin >> input_acc;
-    std::cout << "Input sum to withdraw: ";
-    int withdr {};
-    std::cin >> withdr;
-    all_users[input_cust].accounts[input_acc].acc_balance -= withdr;
-    std::cout << withdr << " withdrawn from account. \n"
-    "Balance: " << all_users[input_cust].accounts[input_acc].acc_balance << '\n';                                    
+    std::cout << "Starting withdrawal.\n ";
+
+    int input_cust{get_cust_number()};
+    int input_acc{get_acc_number(input_cust)};
+
+    std::cout << "Input sum to deposit to account: ";
+    int withd_sum{ask_int_input()};
+
+    all_users[input_cust].accounts[input_acc].acc_balance -= withd_sum;
+    std::cout << withd_sum << " withdrawn from account.\nBalance: "
+        << all_users[input_cust].accounts[input_acc].acc_balance << '\n';
 }

@@ -1,12 +1,13 @@
 #include "includes/account.h"
-#include "includes/fileop.h"
 #include "includes/user.h"
+#include "includes/fileop.h"
 #include <iostream>
 #include <map>
 #include <string>
 #include <fstream>
 
 // A banking program -- Assignment 1_3_2, Exercise 3
+// Now with input validation and other error handling improvements
 
 int main()
 {
@@ -14,47 +15,39 @@ int main()
 
     while (true)
     {       
-        switch (get_choice_main_menu()) // perform function call and return to beginning of loop
+        switch (get_choice_main_menu())
         {
-            case 1:
+            case 1: // creates a new user
             {
-                // Adding a user and info
                 int new_user_num {create_user()};
-
-                std::cout << "Enter name: ";
-                std::string name {ask_str_input()};
-                std::cout << "Enter address: ";
-                std::string addr {ask_str_input()};
-                std::cout << "Enter telephone number: ";
-                std::string tel {ask_str_input()};
-
-                add_user_info(new_user_num, name, addr, tel);
+                add_user_info(new_user_num);
                 break;
             }
-            case 2:
+            case 2: // changes to user management loop
             {
-                bool stay_in_loop = true;
+                bool stay_in_loop {true};
 
                 while (stay_in_loop)   
                 {                    
                     switch (get_choice_actions())
                     {
-                        case 1:
+                        case 1: // print user name etc.
                         {
                             print_user_info();
                             break;
                         }
-                        case 2:
+                        case 2: // create a new account
                         {
                             add_new_account();
                             break;
                         }
-                        case 3:
+                        case 3: // print balance
                         {
-                            check_balance();
+                            int balance {get_acc_balance()};
+                            std::cout << "Account Balance: " << balance << '\n'; 
                             break;
                         }
-                        case 4:
+                        case 4: // deposit money
                         {
                             add_money();
                             break;
@@ -64,9 +57,8 @@ int main()
                             withdraw_money();
                             break;
                         }
-                        case 6:
+                        case 6:  // go back
                         {
-                            // go back
                             stay_in_loop = false;
                             break;
                         }
@@ -83,18 +75,13 @@ int main()
             case 3:
             {
                 print_to_file("bank.txt");
-
                 break;
             }
-
-            break; 
-            
             case 4:
             {
                 std::cout << "Bye bye!\n"; // quits program
                 return 0;
             }
-        
             default:
             {
                 std::cout << "Try again.\n";

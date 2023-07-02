@@ -4,13 +4,15 @@
 #include <string>
 #include <map>
 
+struct Account;
+
 struct User  // all variables related to user
 {
 	std::string name {};
 	std::string address {};
 	std::string tel {};
 	int customer_num {};
-    std::map<int, Account> accounts;  // a map to connect the accounts
+	std::map<int, Account> accounts {}; // a map to connect the accounts
 };
 
 inline std::map<int, User> all_users {}; // this is inline to make it available across files
@@ -26,7 +28,9 @@ int ask_int_input();
 
 bool user_exists(int input, std::map<int, User>& all_users);
 
-void add_user_info(int customer_num, std::string name, std::string addr, std::string tel);
+
+
+void add_user_info(int customer_num);
 
 int get_cust_number();
 
