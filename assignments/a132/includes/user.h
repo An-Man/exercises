@@ -28,8 +28,6 @@ int ask_int_input();
 
 bool user_exists(int input, std::map<int, User>& all_users);
 
-
-
 void add_user_info(int customer_num);
 
 int get_cust_number();
@@ -37,7 +35,5 @@ int get_cust_number();
 void print_user_info();
 
 void ignoreLine();
-
-
 
 #endif

@@ -37,8 +37,6 @@ bool user_exists(int input, std::map<int, User>& all_users)
     return false;
 }
 
-
-
 int create_user()
 {
     while (true)
@@ -62,7 +60,6 @@ int create_user()
         }
     }
 }
-
 
 void add_user_info(int customer_num)  // gets data from user
 {
